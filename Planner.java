@@ -1,6 +1,6 @@
 import java.util.*;
 import javax.swing.*;
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Container;
@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
+/import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 public class Planner {
 	Vector operators;
 	Vector items;
+	////////////////////////////////////////////////////////
 	Random rand;
 	Vector plan;
 	Vector finalgoal;
@@ -35,6 +36,7 @@ public class Planner {
 	Planner(){
 		rand = new Random();
 		items = new Vector();
+		/////////////////////////////////////////////////////////////
 	}
 	//追加
 	public Vector goalsort(Vector goalList){
@@ -118,6 +120,7 @@ public class Planner {
 	}
 	//void⇒ArrayList<String>に変更
 	
+	////////////////////////////////////////////////////////////////////
 	//1行読み込み
 	public static String ReadLine(){
     	try {
@@ -141,6 +144,8 @@ public class Planner {
         }
 	}
 	//色、形とマッチングする名前を探す
+	
+                /////////////////////////////////////////////////////////////
 	public String search(String s){
 		String answer = null;
 		for(int i=0;i < items.size();++i){
@@ -154,6 +159,7 @@ public class Planner {
 	}
 	//左が変換後、右が色と形のまま
 	//色、形の部分を名前に書き換える
+	   /////////////////////////////////////////////////////////////
 	public void instatiate(Vector inList,Vector List){
 		for(int i = 0; i < List.size();++i){
 			//String goal = (String)goalList.elementAt(i);
@@ -187,6 +193,7 @@ public class Planner {
 	public ArrayList<String> start(){
 		initOperators();
 		initItems();
+		   /////////////////////////////////////////////////////////////
 		//変更:ゴール条件をGoalPanelから読み込む
 		Vector goalList     = initGoalList();
 		//Vector goalList = new Vector();
@@ -194,6 +201,8 @@ public class Planner {
 			goalList.addElement(GoalPanel.goal.get(i));
 		}
 		*/
+		
+		   /////////////////////////////////////////////////////////////
 		Vector ingoal = new Vector();
 		instatiate(ingoal,goalList);
 		finalgoal = (Vector)ingoal.clone();
@@ -594,7 +603,7 @@ public class Planner {
 		initialState.addElement("handEmpty");
 		return initialState;
 	}
-	
+	   /////////////////////////////////////////////////////////////
 	private void initItems(){
 		//items = new Vector();
 
@@ -645,7 +654,7 @@ public class Planner {
 		items.addElement(items3);
 	}
 	
-	
+	   /////////////////////////////////////////////////////////////
 
 class Items{
 	public String name;
