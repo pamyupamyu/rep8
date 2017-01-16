@@ -34,6 +34,7 @@ public class Planner {
 
 	Planner(){
 		rand = new Random();
+		items = new Vector();
 	}
 	//追加
 	public Vector goalsort(Vector goalList){
@@ -106,11 +107,14 @@ public class Planner {
 
 	public static void main(String argv[]){
 		//GUI frame = new GUI("GUIサンプル");
+		/*
 		InitPanel frame = new InitPanel("初期状態設定");
 		frame.setLocation(100, 100); //表示位置
 		frame.setSize(384, 412); //表示サイズ
 		frame.setResizable(false); //リサイズの禁止
 		frame.setVisible(true);
+		*/
+		(new Planner()).start();
 	}
 	//void⇒ArrayList<String>に変更
 	
@@ -119,16 +123,20 @@ public class Planner {
     	try {
     		//System.out.println("Please,file's name.");
     		BufferedReader stdReader = new BufferedReader(new InputStreamReader(System.in));
-    		System.out.print("INPUT : ");
+    		//System.out.print("INPUT : ");
     		String line;
     		line = stdReader.readLine(); // ユーザの一行入力を待つ
     		/*
     		if (line.equals(""))
     			line = "＜空文字＞";
     			*/
+    		//stdReader.reset();
     		stdReader.close();
     		return line;
     	} catch (Exception e) {
+    		System.out.println("error");
+
+    		System.out.println(e.toString());
     		e.getStackTrace();
     		return "";
         }
@@ -137,15 +145,16 @@ public class Planner {
 	public String search(String s){
 		String answer = null;
 		for(int i=0;i < items.size();++i){
-			if(items.elementAt(i).name.equals(s) || items.elementAt(i).color.equals(s) || items.elementAt(i).shape.equals(s)){
-				answer = items.elementAt(i).name;
+			Items I = ((Items)items.elementAt(i));
+			if(I.name.equals(s) || I.color.equals(s) || I.shape.equals(s)){
+				answer = I.name;
 			}
 		}
 		
 		return answer;
 	}
 	
-	public void instancegoal(Vector ingoal,Vector goalList){
+	public void instatiategoal(Vector ingoal,Vector goalList){
 		for(int i = 0; i < goalList.size();++i){
 			String goal = (String)goalList.elementAt(i);
 			System.out.println(goal);
@@ -154,13 +163,18 @@ public class Planner {
 			String s;
 			if(tmp.equals("ontable")){
 				s = st.nextToken();
-				s = search(s);
+				ingoal.add(i,"ontable " + search(s));
 			}else if(tmp.equals("clear")){
-				
+				s = st.nextToken();
+				ingoal.add(i,"clear " + search(s));
 			}else if(tmp.equals("handEmpty")){
-				
+				ingoal.add(i,"handEmpty");
 			}else{
-				xony.add((String)goalList.elementAt(i));
+				ingoal.add(i,search(tmp));
+				s = st.nextToken(); //on
+				s = st.nextToken();
+				ingoal.add(i," on " + search(s));
+				//xony.add((String)goalList.elementAt(i));
 			}
 			
 		}
@@ -176,7 +190,7 @@ public class Planner {
 			goalList.addElement(GoalPanel.goal.get(i));
 		}
 		Vector ingoal = new Vector();
-		instacegoal(ingoal,goalList);
+		instatiategoal(ingoal,goalList);
 		finalgoal = (Vector)goalList.clone();
 		
 		//変更:初期状態をInitPanelから読み込む
@@ -571,25 +585,33 @@ public class Planner {
 	}
 	
 	private void initItems(){
-		items = new Vector();
+		//items = new Vector();
 
 		// OPERATOR 1
 		/// NAME
-		String name1 = new String("Place ?x on ?y");
+		System.out.print("name1:");
+		String name1 = ReadLine();
 		/// IF
+		System.out.print("color1:");
 		String color1 = ReadLine();
 		/// ADD-LIST
+		System.out.print("shape1:");
 		String shape1 = ReadLine();
+		System.out.println(color1 + shape1);
 		Items items1 =
 				new Items(name1,color1,shape1);
+		System.out.println(color1 + shape1);
 		items.addElement(items1);
 
 		// OPERATOR 2
 		/// NAME
-		String name2 = new String("remove ?x from on top ?y");
+		System.out.print("name2:");
+		String name2 = ReadLine();
 		/// IF
+		System.out.print("color2:");
 		String color2 = ReadLine();
 		/// ADD-LIST
+		System.out.print("shape2:");
 		String shape2 = ReadLine();
 		
 		Items items2 =
@@ -598,10 +620,13 @@ public class Planner {
 
 		// OPERATOR 3
 		/// NAME
-		String name3 = new String("pick up ?x from the table");
+		System.out.print("name3:");
+		String name3 = ReadLine();
 		/// IF
+		System.out.print("color3:");
 		String color3 = ReadLine();
 		/// ADD-LIST
+		System.out.print("shape3:");
 		String shape3 = ReadLine();
 		
 		Items items3 =
@@ -612,9 +637,9 @@ public class Planner {
 	
 
 class Items{
-	String name;
-	String color;
-	String shape;
+	public String name;
+	public String color;
+	public String shape;
 
 	Items(String theName,
 			String thecolor,String theshape){
@@ -622,6 +647,7 @@ class Items{
 		color     = thecolor;
 		shape    = theshape;
 	}
+
 
 	public String toString(){
 		String result =
