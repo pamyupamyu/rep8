@@ -140,7 +140,7 @@ public class Planner {
     		return "";
         }
 	}
-	
+	//色、形とマッチングする名前を探す
 	public String search(String s){
 		String answer = null;
 		for(int i=0;i < items.size();++i){
@@ -152,27 +152,32 @@ public class Planner {
 		
 		return answer;
 	}
-	
-	public void instatiategoal(Vector ingoal,Vector goalList){
-		for(int i = 0; i < goalList.size();++i){
-			String goal = (String)goalList.elementAt(i);
-			System.out.println(goal);
-			StringTokenizer st = new StringTokenizer((String)goalList.elementAt(i));
+	//左が変換後、右が色と形のまま
+	//色、形の部分を名前に書き換える
+	public void instatiate(Vector inList,Vector List){
+		for(int i = 0; i < List.size();++i){
+			//String goal = (String)goalList.elementAt(i);
+			//System.out.println(goal);
+			StringTokenizer st = new StringTokenizer((String)List.elementAt(i));
 			String tmp = st.nextToken();
 			String s;
 			if(tmp.equals("ontable")){
 				s = st.nextToken();
-				ingoal.add(i,"ontable " + search(s));
+				inList.add(i,"ontable " + search(s));
+				System.out.println(inList.get(i));
 			}else if(tmp.equals("clear")){
 				s = st.nextToken();
-				ingoal.add(i,"clear " + search(s));
+				inList.add(i,"clear " + search(s));
+				System.out.println(inList.get(i));
 			}else if(tmp.equals("handEmpty")){
-				ingoal.add(i,"handEmpty");
+				inList.add(i,"handEmpty");
+				System.out.println(inList.get(i));
 			}else{
 				String tmp2 = search(tmp);
 				s = st.nextToken(); //on
 				s = st.nextToken();
-				ingoal.add(i, tmp2 + " on " + search(s));
+				inList.add(i, tmp2 + " on " + search(s));
+				System.out.println(inList.get(i));
 				//xony.add((String)goalList.elementAt(i));
 			}
 			
@@ -190,7 +195,7 @@ public class Planner {
 		}
 		*/
 		Vector ingoal = new Vector();
-		instatiategoal(ingoal,goalList);
+		instatiate(ingoal,goalList);
 		finalgoal = (Vector)ingoal.clone();
 		
 		//変更:初期状態をInitPanelから読み込む
@@ -200,11 +205,16 @@ public class Planner {
 			initialState.addElement(GUI.state.get(i));
 		}
 		*/
+		Vector inState = new Vector();
+		instatiate(inState,initialState);
+		
 		ingoal = goalsort(ingoal);
 		Hashtable theBinding = new Hashtable();
 		plan = new Vector();
 		
-		planning(ingoal,initialState,theBinding);
+		System.out.println(ingoal);
+		
+		planning(ingoal,inState,theBinding);
 
 		System.out.println("***** This is a plan! *****");
 		for(int i = 0 ; i < plan.size() ; i++){
@@ -549,14 +559,14 @@ public class Planner {
 		//goalList.addElement("F on G");
 		//goalList.addElement("ontable C");
 		//goalList.addElement("clear A");
-		goalList.addElement("red on C"); //(下に積む順番にする)		
+		goalList.addElement("red on blue"); //(下に積む順番にする)		
 		goalList.addElement("blue on red");
 		//goalList.addElement("ontable E");
 		//goalList.addElement("A on B");
 		//goalList.addElement("D on E");
 
-		goalList.addElement("ontable C"); //ゴールの順番大事(?x on ?yより前)
-		//goalList.addElement("clear A"); //(?x on ?yの後ろ)
+		goalList.addElement("ontable cube"); //ゴールの順番大事(?x on ?yより前)
+		goalList.addElement("clear blue"); //(?x on ?yの後ろ)
 		goalList.addElement("handEmpty"); //(最後)
 		//goalList.addElement("ontable G");
 		finalgoal = (Vector)goalList.clone();
@@ -610,7 +620,7 @@ public class Planner {
 		String name2 = "B";//ReadLine();
 		/// IF
 		System.out.print("color2:");
-		String color2 = "red";//ReadLine();
+		String color2 = "blue";//ReadLine();
 		/// ADD-LIST
 		System.out.print("shape2:");
 		String shape2 = "tri";//ReadLine();
@@ -625,7 +635,7 @@ public class Planner {
 		String name3 = "C";//ReadLine();
 		/// IF
 		System.out.print("color3:");
-		String color3 = "green";//ReadLine();
+		String color3 = "red";//ReadLine();
 		/// ADD-LIST
 		System.out.print("shape3:");
 		String shape3 = "nanika";//ReadLine();
