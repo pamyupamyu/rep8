@@ -130,8 +130,7 @@ public class Planner {
     		if (line.equals(""))
     			line = "＜空文字＞";
     			*/
-    		//stdReader.reset();
-    		stdReader.close();
+    		//stdReader.close();
     		return line;
     	} catch (Exception e) {
     		System.out.println("error");
@@ -170,10 +169,10 @@ public class Planner {
 			}else if(tmp.equals("handEmpty")){
 				ingoal.add(i,"handEmpty");
 			}else{
-				ingoal.add(i,search(tmp));
+				String tmp2 = search(tmp);
 				s = st.nextToken(); //on
 				s = st.nextToken();
-				ingoal.add(i," on " + search(s));
+				ingoal.add(i, tmp2 + " on " + search(s));
 				//xony.add((String)goalList.elementAt(i));
 			}
 			
@@ -184,26 +183,28 @@ public class Planner {
 		initOperators();
 		initItems();
 		//変更:ゴール条件をGoalPanelから読み込む
-		//Vector goalList     = initGoalList();
-		Vector goalList = new Vector();
-		for(int i = 0; i < GoalPanel.goal.size(); i++){
+		Vector goalList     = initGoalList();
+		//Vector goalList = new Vector();
+		/*for(int i = 0; i < GoalPanel.goal.size(); i++){
 			goalList.addElement(GoalPanel.goal.get(i));
 		}
+		*/
 		Vector ingoal = new Vector();
 		instatiategoal(ingoal,goalList);
-		finalgoal = (Vector)goalList.clone();
+		finalgoal = (Vector)ingoal.clone();
 		
 		//変更:初期状態をInitPanelから読み込む
-		//Vector initialState = initInitialState();
-		Vector initialState = new Vector();
-		for(int i = 0; i < GUI.state.size(); i++){
+		Vector initialState = initInitialState();
+		//Vector initialState = new Vector();
+		/*for(int i = 0; i < GUI.state.size(); i++){
 			initialState.addElement(GUI.state.get(i));
 		}
-		goalList = goalsort(goalList);
+		*/
+		ingoal = goalsort(ingoal);
 		Hashtable theBinding = new Hashtable();
 		plan = new Vector();
 		
-		planning(goalList,initialState,theBinding);
+		planning(ingoal,initialState,theBinding);
 
 		System.out.println("***** This is a plan! *****");
 		for(int i = 0 ; i < plan.size() ; i++){
@@ -548,8 +549,8 @@ public class Planner {
 		//goalList.addElement("F on G");
 		//goalList.addElement("ontable C");
 		//goalList.addElement("clear A");
-		goalList.addElement("B on C"); //(下に積む順番にする)		
-		goalList.addElement("A on B");
+		goalList.addElement("red on C"); //(下に積む順番にする)		
+		goalList.addElement("blue on red");
 		//goalList.addElement("ontable E");
 		//goalList.addElement("A on B");
 		//goalList.addElement("D on E");
@@ -590,29 +591,29 @@ public class Planner {
 		// OPERATOR 1
 		/// NAME
 		System.out.print("name1:");
-		String name1 = ReadLine();
+		String name1 = "A"; //ReadLine();
 		/// IF
 		System.out.print("color1:");
-		String color1 = ReadLine();
+		String color1 = "blue";//ReadLine();
 		/// ADD-LIST
 		System.out.print("shape1:");
-		String shape1 = ReadLine();
-		System.out.println(color1 + shape1);
+		String shape1 = "cube";//ReadLine();
+		//System.out.println(color1 + shape1);
 		Items items1 =
 				new Items(name1,color1,shape1);
-		System.out.println(color1 + shape1);
+		//System.out.println(color1 + shape1);
 		items.addElement(items1);
 
 		// OPERATOR 2
 		/// NAME
 		System.out.print("name2:");
-		String name2 = ReadLine();
+		String name2 = "B";//ReadLine();
 		/// IF
 		System.out.print("color2:");
-		String color2 = ReadLine();
+		String color2 = "red";//ReadLine();
 		/// ADD-LIST
 		System.out.print("shape2:");
-		String shape2 = ReadLine();
+		String shape2 = "tri";//ReadLine();
 		
 		Items items2 =
 				new Items(name2,color2,shape2);
@@ -621,13 +622,13 @@ public class Planner {
 		// OPERATOR 3
 		/// NAME
 		System.out.print("name3:");
-		String name3 = ReadLine();
+		String name3 = "C";//ReadLine();
 		/// IF
 		System.out.print("color3:");
-		String color3 = ReadLine();
+		String color3 = "green";//ReadLine();
 		/// ADD-LIST
 		System.out.print("shape3:");
-		String shape3 = ReadLine();
+		String shape3 = "nanika";//ReadLine();
 		
 		Items items3 =
 				new Items(name3,color3,shape3);
