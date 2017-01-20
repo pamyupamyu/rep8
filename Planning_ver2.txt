@@ -29,6 +29,7 @@ class common
 
 }
 
+
 //メインのクラス
 public class Planning : MonoBehaviour
 {
@@ -48,13 +49,15 @@ public class Planning : MonoBehaviour
         //乱数にて行う
         rand = new Random();
     }
-    public List<string> goalsort(List<string> goalList)
+    
+      public List<string> goalsort(List<string> goalList)
     {
         List<string> newgoal = new List<string>();
         List<string> ontable = new List<string>();
         List<string> xony = new List<string>();
         List<string> clear = new List<string>();
         List<string> handEmpty = new List<string>();
+        List<string> holding = new List<string>();
         List<string> poada = new List<string>();
 
         for (int i = 0; i < goalList.Count; ++i)
@@ -74,33 +77,16 @@ public class Planning : MonoBehaviour
             {
                 handEmpty.Add(goalList[i]);
             }
-            else
+            else if (tmp.Equals("holding"))
             {
-                xony.Add(goalList[i]);
-            }
-        }
-        /*
-        for (int i = 0; i < goalList.Count; ++i)
-        {
-            if (goalList[i].Contains("ontable"))
-            {
-                ontable.Add(goalList[i]);
-                //nextTokenをpoadaに入れる
-            }
-            else if (goalList[i].Contains("clear"))
-            {
-                clear.Add(goalList[i]);
-            }
-            else if (goalList[i].Contains("handEmpty"))
-            {
-                handEmpty.Add(goalList[i]);
+                holding.Add(goalList[i]);
             }
             else
             {
                 xony.Add(goalList[i]);
             }
         }
-        */
+ 
         for (int i = 0; i < ontable.Count; ++i)
         {
             newgoal.Add(ontable[i]);
@@ -115,6 +101,10 @@ public class Planning : MonoBehaviour
         {
             newgoal.Add(clear[i]);
         }
+        for (int i = 0; i < holding.Count; ++i)
+        {
+            newgoal.Add(holding[i]);
+        }
         for (int i = 0; i < handEmpty.Count; ++i)
         {
             newgoal.Add(handEmpty[i]);
@@ -122,7 +112,7 @@ public class Planning : MonoBehaviour
 
         return newgoal;
     }
-
+    
     public List<string> XonYsort(List<string> xony, List<string> poada)
     {
         List<string> newxony = new List<string>();
