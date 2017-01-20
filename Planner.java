@@ -47,6 +47,7 @@ public class Planner {
 		ArrayList xony = new ArrayList();
 		ArrayList clear = new ArrayList();
 		ArrayList hE = new ArrayList();
+		ArrayList holding = new ArrayList();
 		ArrayList poada = new ArrayList();
 
 		for(int i = 0; i < goalList.size(); ++i){ //ゴールの内容ごとに分類
@@ -59,6 +60,8 @@ public class Planner {
 				clear.add((String)goalList.elementAt(i));
 			}else if(tmp.equals("handEmpty")){
 				hE.add((String)goalList.elementAt(i));
+			}else if(tmp.equals("holding")){
+				holding.add((String)goalList.elementAt(i));
 			}else{
 				xony.add((String)goalList.elementAt(i));
 			}
@@ -77,6 +80,9 @@ public class Planner {
 		}
 		for(int i = 0; i < clear.size(); ++i){
 			newgoal.add(clear.get(i));
+		}
+		for(int i = 0; i < holding.size(); ++i){
+			newgoal.add(holding.get(i));
 		}
 		for(int i = 0; i < hE.size(); ++i){
 			newgoal.add(hE.get(i));
@@ -177,6 +183,9 @@ public class Planner {
 			}else if(tmp.equals("handEmpty")){
 				inList.add(i,"handEmpty");
 				//System.out.println(inList.get(i));
+			}else if(tmp.equals("holding")){
+				s = st.nextToken();
+				inList.add(i,"holding " + search(s));
 			}else{
 				String tmp2 = search(tmp);
 				s = st.nextToken(); //on
@@ -583,15 +592,16 @@ public class Planner {
 
 	public static Vector initInitialState(){
 		Vector initialState = new Vector();
-		initialState.addElement("clear A");
+		//initialState.addElement("clear A");
 		initialState.addElement("clear B");
 		initialState.addElement("clear C");
 		//initialState.addElement("clear G");
 
-		initialState.addElement("ontable A");
+		//initialState.addElement("ontable A");
 		initialState.addElement("ontable B");
 		initialState.addElement("ontable C");
 		//initialState.addElement("ontable D");
+		initialState.addElement("holding A");
 
 		//initialState.addElement("C on A");
 		//initialState.addElement("A on B");
@@ -599,7 +609,7 @@ public class Planner {
 		//initialState.addElement("E on D");
 		//initialState.addElement("F on E");
 		//initialState.addElement("G on F");
-		initialState.addElement("handEmpty");
+		//initialState.addElement("handEmpty");
 		return initialState;
 	}
 	   /////////////////////////////////////////////////////////////
