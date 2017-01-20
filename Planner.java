@@ -156,7 +156,6 @@ public class Planner {
 				answer = I.name;
 			}
 		}
-		
 		return answer;
 	}
 	//左が変換後、右が色と形のまま
@@ -170,20 +169,20 @@ public class Planner {
 			if(tmp.equals("ontable")){
 				s = st.nextToken();
 				inList.add(i,"ontable " + search(s));
-				System.out.println(inList.get(i));
+				//System.out.println(inList.get(i));
 			}else if(tmp.equals("clear")){
 				s = st.nextToken();
 				inList.add(i,"clear " + search(s));
-				System.out.println(inList.get(i));
+				//System.out.println(inList.get(i));
 			}else if(tmp.equals("handEmpty")){
 				inList.add(i,"handEmpty");
-				System.out.println(inList.get(i));
+				//System.out.println(inList.get(i));
 			}else{
 				String tmp2 = search(tmp);
 				s = st.nextToken(); //on
 				s = st.nextToken();
 				inList.add(i, tmp2 + " on " + search(s));
-				System.out.println(inList.get(i));
+				//System.out.println(inList.get(i));
 			}
 		}
 	}
@@ -195,15 +194,16 @@ public class Planner {
 		//変更:ゴール条件をGoalPanelから読み込む
 		Vector goalList     = initGoalList();
 		//Vector goalList = new Vector();
-		//for(int i = 0; i < GoalPanel.goal.size(); i++){
-		//	goalList.addElement(GoalPanel.goal.get(i));
-		//}
+		for(int i = 0; i < GoalPanel.goal.size(); i++){
+			goalList.addElement(GoalPanel.goal.get(i));
+		}
 		
 		
 		   /////////////////////////////////////////////////////////////
 		Vector ingoal = new Vector();
-		ingoal = goalList;
-		//instatiate(ingoal,goalList);
+		//ingoal = goalList;
+		instatiate(ingoal,goalList);
+		System.out.println("Goal" + ingoal);
 		finalgoal = (Vector)ingoal.clone();
 		
 		//変更:初期状態をInitPanelから読み込む
@@ -215,7 +215,7 @@ public class Planner {
 		
 		Vector inState = new Vector();
 		instatiate(inState,initialState);
-		
+		System.out.println("Initial" + inState);
 		ingoal = goalsort(ingoal);
 		Hashtable theBinding = new Hashtable();
 		plan = new Vector();
@@ -567,14 +567,14 @@ public class Planner {
 		//goalList.addElement("F on G");
 		//goalList.addElement("ontable C");
 		//goalList.addElement("clear A");
-		goalList.addElement("B on C"); //(下に積む順番にする)		
-		goalList.addElement("C on A");
+		goalList.addElement("red on blue"); //C on A //(下に積む順番にする)		
+		goalList.addElement("blue on red"); //B on C
 		//goalList.addElement("ontable E");
 		//goalList.addElement("A on B");
 		//goalList.addElement("D on E");
 
-		goalList.addElement("ontable A"); //ゴールの順番大事(?x on ?yより前)
-		goalList.addElement("clear B"); //(?x on ?yの後ろ)
+		goalList.addElement("ontable cube"); //ontable A //ゴールの順番大事(?x on ?yより前)
+		goalList.addElement("clear tri"); //clear B //(?x on ?yの後ろ)
 		goalList.addElement("handEmpty"); //(最後)
 		//goalList.addElement("ontable G");
 		finalgoal = (Vector)goalList.clone();
@@ -583,18 +583,18 @@ public class Planner {
 
 	public static Vector initInitialState(){
 		Vector initialState = new Vector();
-		//initialState.addElement("clear A");
-		//initialState.addElement("clear B");
+		initialState.addElement("clear A");
+		initialState.addElement("clear B");
 		initialState.addElement("clear C");
 		//initialState.addElement("clear G");
 
-		//initialState.addElement("ontable A");
+		initialState.addElement("ontable A");
 		initialState.addElement("ontable B");
-		//initialState.addElement("ontable C");
+		initialState.addElement("ontable C");
 		//initialState.addElement("ontable D");
 
-		initialState.addElement("C on A");
-		initialState.addElement("A on B");
+		//initialState.addElement("C on A");
+		//initialState.addElement("A on B");
 		//initialState.addElement("D on B");
 		//initialState.addElement("E on D");
 		//initialState.addElement("F on E");
@@ -608,13 +608,13 @@ public class Planner {
 
 		// OPERATOR 1
 		/// NAME
-		System.out.print("name1:");
+		//System.out.print("name1:");
 		String name1 = "A"; //ReadLine();
 		/// IF
-		System.out.print("color1:");
+		//System.out.print("color1:");
 		String color1 = "blue";//ReadLine();
 		/// ADD-LIST
-		System.out.print("shape1:");
+		//System.out.print("shape1:");
 		String shape1 = "cube";//ReadLine();
 		//System.out.println(color1 + shape1);
 		Items items1 =
@@ -624,13 +624,13 @@ public class Planner {
 
 		// OPERATOR 2
 		/// NAME
-		System.out.print("name2:");
+		//System.out.print("name2:");
 		String name2 = "B";//ReadLine();
 		/// IF
-		System.out.print("color2:");
+		//System.out.print("color2:");
 		String color2 = "blue";//ReadLine();
 		/// ADD-LIST
-		System.out.print("shape2:");
+		//System.out.print("shape2:");
 		String shape2 = "tri";//ReadLine();
 		
 		Items items2 =
@@ -639,14 +639,15 @@ public class Planner {
 
 		// OPERATOR 3
 		/// NAME
-		System.out.print("name3:");
+		//System.out.print("name3:");
 		String name3 = "C";//ReadLine();
 		/// IF
-		System.out.print("color3:");
+		//System.out.print("color3:");
 		String color3 = "red";//ReadLine();
 		/// ADD-LIST
-		System.out.print("shape3:");
-		String shape3 = "nanika";//ReadLine();
+		//System.out.print("shape3:");
+		//System.out.println("");
+		String shape3 = "trapezoid";//ReadLine();
 		
 		Items items3 =
 				new Items(name3,color3,shape3);
