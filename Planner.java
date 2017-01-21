@@ -40,6 +40,7 @@ public class Planner {
 		items = new Vector();
 		/////////////////////////////////////////////////////////////
 	}
+	
 	//追加
 	public Vector goalsort(Vector goalList){
 		Vector newgoal = new Vector();
@@ -575,15 +576,19 @@ public class Planner {
 		Vector goalList = new Vector();
 		//goalList.addElement("F on G");
 		//goalList.addElement("ontable C");
-		//goalList.addElement("clear A");
-		goalList.addElement("red on blue"); //C on A //(下に積む順番にする)		
-		goalList.addElement("blue on red"); //B on C
+		goalList.addElement("clear A");
+		//goalList.addElement("clear B");
+		goalList.addElement("B on C");
+		goalList.addElement("A on B");
+		goalList.addElement("ontable C");
+		//goalList.addElement("red on blue"); //C on A //(下に積む順番にする)		
+		//goalList.addElement("yellow on red"); //B on C
 		//goalList.addElement("ontable E");
 		//goalList.addElement("A on B");
 		//goalList.addElement("D on E");
 
-		goalList.addElement("ontable cube"); //ontable A //ゴールの順番大事(?x on ?yより前)
-		goalList.addElement("clear tri"); //clear B //(?x on ?yの後ろ)
+		//goalList.addElement("ontable cube"); //ontable A //ゴールの順番大事(?x on ?yより前)
+		//goalList.addElement("clear tri"); //clear B //(?x on ?yの後ろ)
 		goalList.addElement("handEmpty"); //(最後)
 		//goalList.addElement("ontable G");
 		finalgoal = (Vector)goalList.clone();
@@ -592,16 +597,16 @@ public class Planner {
 
 	public static Vector initInitialState(){
 		Vector initialState = new Vector();
-		//initialState.addElement("clear A");
-		initialState.addElement("clear B");
+		initialState.addElement("clear A");
+		//initialState.addElement("clear B");
 		initialState.addElement("clear C");
 		//initialState.addElement("clear G");
-
+		initialState.addElement("A on B");
 		//initialState.addElement("ontable A");
 		initialState.addElement("ontable B");
 		initialState.addElement("ontable C");
 		//initialState.addElement("ontable D");
-		initialState.addElement("holding A");
+		//initialState.addElement("holding A");
 
 		//initialState.addElement("C on A");
 		//initialState.addElement("A on B");
@@ -609,7 +614,7 @@ public class Planner {
 		//initialState.addElement("E on D");
 		//initialState.addElement("F on E");
 		//initialState.addElement("G on F");
-		//initialState.addElement("handEmpty");
+		initialState.addElement("handEmpty");
 		return initialState;
 	}
 	   /////////////////////////////////////////////////////////////
@@ -638,7 +643,7 @@ public class Planner {
 		String name2 = "B";//ReadLine();
 		/// IF
 		//System.out.print("color2:");
-		String color2 = "blue";//ReadLine();
+		String color2 = "yellow";//ReadLine();
 		/// ADD-LIST
 		//System.out.print("shape2:");
 		String shape2 = "tri";//ReadLine();
