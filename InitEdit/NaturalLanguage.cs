@@ -1,0 +1,145 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class NaturalLanguage : MonoBehaviour {
+
+    //状態の方
+    //文字を探す＞＞onを探す＞＞文字を探す。。。と探索していく
+    public static string Natural_State(string natu_lang)
+    {
+        string[] words = natu_lang.Split(); //space区切り
+        string[] clearkey = { "not", "nothing", "clear" }; //これらがあるときclearを判断
+        string[] holdingkey = { "have", "hold", "holding" };
+        string[] blockkey = { "A", "B", "C" };
+        for (int i = 0; i < words.Length; ++i)
+        {
+            if (words[i].Equals("A") || words[i].Equals("B") || words[i].Equals("C"))
+            {
+                for (int j = i; j < words.Length; ++j)
+                {
+                    if (words[j].Equals("on"))
+                    {
+                        for (int k = j + 1; k < words.Length; ++k)
+                        {
+                            if (words[k].Equals("A") || words[k].Equals("B") || words[k].Equals("C"))
+                            {
+                                return (words[i] + " on " + words[k]);
+                            }
+                        }
+                        return ("ontable " + words[i]);
+                    }
+                }
+                if (Contains_List(words, clearkey))
+                {
+                    return ("clear " + words[i]);
+                }
+                else if (Contains_List(words, holdingkey))
+                {
+                    return ("holding " + words[i]);
+                }
+            }
+            if (!Contains_List(words, blockkey)&&(words[i].Equals("no")|| words[i].Equals("nothing")||words[i].Equals("empty")))
+            {
+                return ("handEmpty");
+            }
+        }
+        return ("該当なし");
+    }//Natural_State
+
+    //動作の方
+    public static string Natural_Order(string natu_lang)
+    {
+        string[] words = natu_lang.Split();
+        string[] placekey = { "put", "place" };
+        string[] removekey = { "remove", "pick", "from" };
+        string[] pickkey = { "remove", "pick", "from" };
+        string[] putkey = { "put", "place" };
+        if (Contains_List(words, placekey) || Contains_List(words, putkey))
+        {
+            for (int i = 0; i < words.Length; ++i)
+            {
+                if (words[i].Equals("A") || words[i].Equals("B") || words[i].Equals("C"))
+                {
+                    for (int j = i; j < words.Length; ++j)
+                    {
+                        if (words[j].Equals("on"))
+                        {
+                            for (int k = j + 1; k < words.Length; ++k)
+                            {
+                                if (words[k].Equals("A") || words[k].Equals("B") || words[k].Equals("C"))
+                                {
+                                    if (Contains_List(words, placekey))
+                                    {
+                                        return ("place " + words[i] + " on " + words[k]);
+                                    }
+                                }
+                            }
+                            if (Contains_List(words, putkey))
+                            {
+                                return ("put " + words[i] + " down on the table");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if (Contains_List(words, removekey) || Contains_List(words, pickkey))
+        {
+            for (int i = 0; i < words.Length; ++i)
+            {
+                if (words[i].Equals("A") || words[i].Equals("B") || words[i].Equals("C"))
+                {
+                    for (int j = i; j < words.Length; ++j)
+                    {
+                        if (words[j].Equals("on") || words[j].Equals("from"))
+                        {
+                            for (int k = j + 1; k < words.Length; ++k)
+                            {
+                                if (words[k].Equals("A") || words[k].Equals("B") || words[k].Equals("C"))
+                                {
+                                    if (Contains_List(words, removekey))
+                                    {
+                                        return ("remove " + words[i] + " from top on " + words[k]);
+                                    }
+                                }
+                            }
+                            if (Contains_List(words, pickkey))
+                            {
+                                return ("pick up " + words[i] + " from the table");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ("該当なし");
+    }//Natural_Order
+
+    //含有 words と key が一つでも一致するか否か
+    public static bool Contains_List(string[] words, string[] key)
+    {
+        for (int i = 0; i < key.Length; i++)
+        {
+            for (int j = 0; j < words.Length; j++)
+            {
+                if (key[i].Equals(words[j]))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }//Contains_List
+     // Use this for initialization
+    void Start () {
+        string natural_state = "B on"; //状態の命令文
+        string natural_order = "remove A from B"; //動作の命令文
+        Debug.Log(Natural_State(natural_state));
+        Debug.Log(Natural_Order(natural_order));
+    }
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}
