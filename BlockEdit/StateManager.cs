@@ -29,7 +29,7 @@ public class StateManager : MonoBehaviour {
         Debug.Log("Next scene");
         if (Missmatch(BlockState[0],BlockState[1],BlockState[2]))
         {
-            SceneManager.LoadScene("InitEdit");
+            SceneManager.LoadScene("Init");
         }
     }
 

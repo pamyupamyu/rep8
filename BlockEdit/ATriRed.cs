@@ -7,8 +7,7 @@ public class ATriRed : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //gameObject取得 
-        GetComponent<Renderer>().material.color = Color.red;
+ 
     }
 
     // Update is called once per frame

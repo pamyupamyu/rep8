@@ -8,6 +8,7 @@ public class InputLanguage2 : MonoBehaviour
 
     InputField inputField;
     public static List<string> goal_NL = new List<string>();
+
     /// <summary>
         /// Startメソッド
         /// InputFieldコンポーネントの取得および初期化メソッドの実行
@@ -37,6 +38,7 @@ public class InputLanguage2 : MonoBehaviour
         Debug.Log(order);
 
         OrderCheck(goal_NL, order);
+        
 
         InitInputField(); //フォーカスが外れたとき初期化
     }
@@ -202,6 +204,7 @@ public class InputLanguage2 : MonoBehaviour
 
     }//statecheck
 
+  
 
 }
 
