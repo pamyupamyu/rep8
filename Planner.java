@@ -576,8 +576,8 @@ public class Planner {
 		//goalList.addElement("F on G");
 		//goalList.addElement("ontable C");
 		//goalList.addElement("clear A");
-		goalList.addElement("red on blue"); //C on A //(下に積む順番にする)		
-		goalList.addElement("blue on red"); //B on C
+		goalList.addElement("cian on red"); //C on A //(下に積む順番にする)		
+		goalList.addElement("blue on cian"); //B on C
 		//goalList.addElement("ontable E");
 		//goalList.addElement("A on B");
 		//goalList.addElement("D on E");
@@ -622,7 +622,7 @@ public class Planner {
 		String name1 = "A"; //ReadLine();
 		/// IF
 		//System.out.print("color1:");
-		String color1 = "blue";//ReadLine();
+		String color1 = "red";//ReadLine();
 		/// ADD-LIST
 		//System.out.print("shape1:");
 		String shape1 = "cube";//ReadLine();
@@ -653,7 +653,7 @@ public class Planner {
 		String name3 = "C";//ReadLine();
 		/// IF
 		//System.out.print("color3:");
-		String color3 = "red";//ReadLine();
+		String color3 = "cian";//ReadLine();
 		/// ADD-LIST
 		//System.out.print("shape3:");
 		//System.out.println("");

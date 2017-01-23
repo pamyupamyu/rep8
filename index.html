@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+
+  <!--
+   デフォルトのスタイル
+   より見やすく変更しても良い
+  -->
+  <link rel="stylesheet" href="default.css"/>
+
+  <!--
+    SyntaxHighlighter 3.0.83 (http://alexgorbatchev.com/SyntaxHighlighter/)
+    Java のコードを読みやすくする
+  -->
+  <link rel="stylesheet" href="shCore.css"/>
+  <link rel="stylesheet" href="shThemeDjango.css"/>
+  <script src="shCore.js"></script>
+  <script src="shBrushJava.js"></script>
+  <script>SyntaxHighlighter.all();</script>
+
+  <!--
+    目次を動的に生成する
+  -->
+  <script src="outliner.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      // 第一引数: アウトライン対象の要素のセレクタ，第二引数: アウトラインを格納する要素のセレクタ．
+      new TOutliner('h2', '#outline');
+    });
+  </script>
+
+  <title>知能プログラミング演習IIグループ作成 レポート8</title>
+</head>
+
+<!-- このグループ作成資料は，同じファイルを全員のGrepX（Grep5やGrep6等）ディレクトリにコピーして置くこと -->
+
+<body>
+<header>
+  <!-- グループ番号を書く．-->
+  <h1>グループ1</h1>
+
+  <!-- 目次生成用 -->
+  <nav id="outline"></nav>
+</header>
+
+<!-- グループ全員の名前, 学籍番号を書き，個人作成書類へのリンクを張る -->
+<h2>メンバー</h2>
+<ul>
+<li><a href="../../../../ckb15068/workspace/kprep/rep8/index.html">島野広大 26115068 </a>
+<li><a href="../../../../ckb15069/workspace/kprep/rep8/index.html">清水涼太 26115069 </a>
+<li><a href="../../../../ckb15073/workspace/kprep/rep8/index.html">椙田大輔 26115073 </a>
+<li><a href="../../../../ckb15070/workspace/kprep/rep8/index.html">新海知道 26115070 </a>
+<li><a href="../../../../ckb15074/workspace/kprep/rep8/index.html">鈴木健太 26115074 </a>
+</ul>
+
+<h2>役割分担</h2>
+<!-- 役割分担を書く．-->
+<ul>
+<li>島野広大: 自然言語処理
+<li>清水涼太: プランニング拡張 , グループ作成書類担当
+<li>椙田大輔: プランニング拡張 , スライド作成
+<li>新海知道: Unityによる3次元空間の実装
+<li>鈴木健太: Unityによる3次元空間の実装
+</ul>
+
+<h2>ソースファイル</h2>
+<ul>
+  <li><a href="Planner.java">Planner.java</a>
+  <li><a href="Planner.exe">Planner.exe</a>
+    <!-- 実装・変更したソースファイルへのリンク．修正する． -->
+    <!-- ※ リンクは絶対パスに変更せず，上記のような相対パスのままで！ -->
+</ul>
+
+<hr>
+
+<h2>課題8-1</h2>
+<!-- 課題を書く．-->
+
+<h3>拡張した内容</h3>
+<!--
+ もし自分で独自に決めた仕様があれば，その説明を書く．
+-->
+<p>グループで話し合った結果，課題7の発展内容を参考にし、以下の3点を追加した.</p>
+
+<ol>
+  <li>色と形の情報を追加したプランニング</li>
+  <li>自然言語処理による操作</li>
+  <li>3次元空間でのプランニング</li>
+</ol>
+
+<p>
+  1.に関して，課題7-4の内容を行い、色と形で指定された場合でもゴール出来るプランニングを作成した.
+</p>
+<p>
+  2.に関しては，英語での命令を可能にした.
+</p>
+<p>3.に関しては、Unityを使用することで、3次元空間でのブロック操作を実現した.</p>
+
+<h3>デモシナリオの内容</h3>
+<!--  どのような設計をしたか．-->
+<p>
+  <li>どのような実装をしたかを説明、考察(3つの内容で合計7分程度)
+  <li>実際にGUIを起動して動作を見せる(5分程度)
+</p>
+
+
+
+<h3>聴衆へのアピール効果</h3>
+<p>
+  Unityを用いたGUIをデモを見せる事で強調する.
+  最後にデモをする時間を5分程取ることで印象に残すことが出来ると考えられる.
+</p>
+
+
+<h2>課題8-2</h2>
+<!-- 以下，上記と同様 -->
+<h3>作成スライド</h3>
+<li><a href="グループ1.pdf">グループ1発表スライド</a>
+
+
+<h2>課題8-3</h2>
+
+<h3>リハーサルにかかった時間</h3>
+<p>
+  <li>1回目:14分
+  <li>2回目:12分
+</p>
+
+<h3>質疑応答内容</h3>
+<p>
+ <li>Q.ブロックが3つにしか対応出来てないのはなぜですか.<br>
+   A.プランニングの方では出来ているが、Unityの方で実装する時間が有りませんでした.
+ <li>Q.こういう(特定)言語には対応出来ないのですか.<br>
+   A.キーワードを増やすことで可能になると思いますが、必要では無いと判断しました.
+</p>
+
+<h3>発表での改善点</h3>
+<p>
+  <li>言葉を聞き取りやすい早さで話すようにする.
+  <li>発表者の切り替えをスムーズに行う.
+  <li>スライドに工夫を凝らせばもっと見やすくなるのではないかと思った.
+</p>
+
+<hr>
+
+
+
+</body>
+</html>
